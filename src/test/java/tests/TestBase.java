@@ -8,19 +8,25 @@ import configs.ConfigMobile;
 import configs.ConfigWeb;
 import drivers.BrowserstackMobileDriver;
 import drivers.LocalMobileDriver;
+import drivers.WebDriver;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import pages.GalleryPage;
+import pages.MainPage;
 
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestBase {
     public static ConfigWeb configWeb = ConfigFactory.create(ConfigWeb.class, System.getProperties());
     public static ConfigMobile configMobile = ConfigFactory.create(ConfigMobile.class, System.getProperties());
-    public static ConfigApi configApi = ConfigFactory.create(ConfigApi.class, System.getProperties());
+
+    public MainPage mainPage = new MainPage();
+    public GalleryPage galleryPage = new GalleryPage();
+
 
     @BeforeAll
     static void beforeAll(){
@@ -30,7 +36,7 @@ public class TestBase {
                 Configuration.browserSize = null;
                 break;
             case "web":
-                //new WebDriver()
+                new WebDriver();
                 break;
             case "api":
                 break;
